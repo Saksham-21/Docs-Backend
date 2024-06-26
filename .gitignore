@@ -1,11 +1,2 @@
-faiss_index
-.env
-__pycache__
-.env
 myenv
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-docs-app-47fad-firebase-adminsdk-ker9u-14ecb629ae.json
+.env
