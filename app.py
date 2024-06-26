@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
+from flask_cors import CORS,cross_origin
 from PyPDF2 import PdfReader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 import datetime 
 
 app = Flask(__name__)
-CORS(app)
+CORS(app,origins=['https://docsapptest.vercel.app/foreground','https://docsapptest.vercel.app/foreground/chatarea','https://docsapptest.vercel.app'])
 load_dotenv()
 config={
     "apiKey": "AIzaSyBQQ4kVs0hlvK1YUsIT1YLa9r0INhjPWwU",
@@ -78,6 +78,7 @@ def user_input(user_question):
 
 
 @app.route('/get_pdf_urls', methods=['POST'])
+@cross_origin()
 def get_pdf_urls():
     data = request.json
     blob_name = data.get("blob_name")
@@ -98,6 +99,7 @@ def get_pdf_urls():
     return jsonify({"message": "PDFs processed successfully", "urls": urls})
 
 @app.route('/ask_question', methods=['POST'])
+@cross_origin()
 def ask_question():
     data = request.json
     user_question = data.get("question")
