@@ -28,7 +28,7 @@ config={
     "appId": "1:869820582771:web:0028f17fff858c560cd306",
     "measurementId": "G-CM158SXNJQ"
 }
-cred = credentials.Certificate('docs-app-47fad-firebase-adminsdk-ker9u-14ecb629ae.json')
+cred = credentials.Certificate('docs.json')
 firebase_admin.initialize_app(cred, {
     'storageBucket': config["storageBucket"]
 })
