@@ -9,28 +9,34 @@ from langchain.prompts import PromptTemplate
 import firebase_admin
 from firebase_admin import credentials, firestore,storage
 import requests
-import pyrebase
+# import pyrebase
 from io import BytesIO
 import os 
-from dotenv import load_dotenv
+from dotenv import load_dotenv,dotenv_values
 import datetime 
+load_dotenv()
 
 app = Flask(__name__)
-CORS(app,origins=['https://docsapptest.vercel.app/foreground','https://docsapptest.vercel.app/foreground/chatarea','https://docsapptest.vercel.app'])
-load_dotenv()
+CORS(app, resources={r"/*": {"origins": "*"}})
+apiKey= os.getenv("APIKEY")
+authDomain= os.getenv("AUTHDOMAIN")
+projectId= os.getenv("PROJECTID")
+storageBucket= os.getenv("STORAGEBUCKET")
+messagingSenderId= os.getenv("MESSAGINGSENDERID")
+appId= os.getenv("APPID")
+measurementId=os.getenv("MEASUREMENTID")
 config={
-    "apiKey": "AIzaSyBQQ4kVs0hlvK1YUsIT1YLa9r0INhjPWwU",
-    "authDomain": "docs-app-47fad.firebaseapp.com",
-    "databaseURL": "https://docs-app-47fad.firebaseio.com",
-    "projectId": "docs-app-47fad",
-    "storageBucket": "docs-app-47fad.appspot.com",
-    "messagingSenderId": "869820582771",
-    "appId": "1:869820582771:web:0028f17fff858c560cd306",
-    "measurementId": "G-CM158SXNJQ"
+    apiKey: apiKey,
+    authDomain: authDomain,
+    projectId: projectId,
+    storageBucket: storageBucket,
+    messagingSenderId: messagingSenderId,
+    appId: appId,
+    measurementId:measurementId
 }
-cred = credentials.Certificate('docs.json')
+cred = credentials.Certificate('docs-app2.json')
 firebase_admin.initialize_app(cred, {
-    'storageBucket': config["storageBucket"]
+    'storageBucket': config[storageBucket]
 })
 bucket = storage.bucket()
 blobs = bucket.list_blobs()
